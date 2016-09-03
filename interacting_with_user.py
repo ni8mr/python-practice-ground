@@ -3,7 +3,7 @@
     Asks the user to enter his/her last name.
     Prints out the user's last name and date of birth, in that order. """ 
 
-""" Problem set 0: Introduction to Computer Science and Programming """
+""" Problem set 0: Introduction to Computer Science and Programming(MIT Courseware) """
 
 birth_date = raw_input("Enter your birth date: ")
 last_name = raw_input("Enter your last name: ")
