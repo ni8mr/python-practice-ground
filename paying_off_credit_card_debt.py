@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" Problem set 2: Introduction to Computer Science and Programming(MIT Courseware) """ 
+""" Problem set 1: Introduction to Computer Science and Programming(MIT Courseware) """ 
 
 """ Suppose, each month, a credit card statement will come with the option for us to pay a minimum
  amount of our charge, usually 2% of the balance due. However, the credit card company earns 
@@ -16,7 +16,8 @@
  Principal paid = Minimum monthly payment – Interest paid 
  Remaining balance = Balance – Principal paid 
 
- This is a program to calculate the credit card balance after one year if a person only pays the minimum monthly payment required by the credit card company each month. 
+ This is a program to calculate the credit card balance after one year if a person only pays the minimum monthly payment required by
+ the credit card company each month. 
  User input: the outstanding balance on the credit card, annual interest rate, minimum monthly payment rate.
  For each month, this will print the minimum monthly payment, remaining balance, principle paid in 
  the format shown in the test cases below. All numbers should be rounded to the nearest penny. Finally, this 
@@ -128,28 +129,90 @@
  RESULT 
  Total amount paid: $2030.15 
  Remaining balance: $3615.74  """
+print("Program1 is running\n\n")
 
-outstanding_balance = float(raw_input("Enter the outstanding balance of your credit card: "))
-annual_interest_rate = float(raw_input("Enter the annual credit card interest rate as a decimal: "))
-minimum_monthly_payment_rate = float(raw_input("Enter the minimum monthly payment rate as a decimal: "))
-
+outstanding_balance = float(input("Enter the outstanding balance of your credit card: "))
+annual_interest_rate = float(input("Enter the annual credit card interest rate as a decimal: "))
+minimum_monthly_payment_rate = float(input("Enter the minimum monthly payment rate as a decimal: "))
 
 monthly_interest_rate = annual_interest_rate/12.0
 paid_amount = 0
 
 for i in range(1,13):
-	print("Month: "+ str(i))
- 	minimum_monthly_payment = minimum_monthly_payment_rate * outstanding_balance
- 	print("Minimum monthly payment: $"+ str(round(minimum_monthly_payment,2)))
- 	paid_interest = monthly_interest_rate * outstanding_balance
- 	paid_principal = minimum_monthly_payment - paid_interest
- 	print("Principal paid: $"+ str(round(paid_principal, 2)))
- 	outstanding_balance = outstanding_balance - paid_principal
- 	print("Remaining balance: $"+ str(round(outstanding_balance,2)))
- 	paid_amount = paid_amount + minimum_monthly_payment
- 	if i ==12 :
- 		print("RESULT\nTotal amount paid: $" + str(round(paid_amount,2)) + "\nRemaining balance: $"+ str(round(outstanding_balance,2)))
+    print("Month: "+ str(i))
+    minimum_monthly_payment = minimum_monthly_payment_rate * outstanding_balance
+    print("Minimum monthly payment: $"+ str(round(minimum_monthly_payment,2)))
+    paid_interest = monthly_interest_rate * outstanding_balance
+    paid_principal = minimum_monthly_payment - paid_interest
+    print("Principal paid: $"+ str(round(paid_principal, 2)))
+    outstanding_balance = outstanding_balance - paid_principal
+    print("Remaining balance: $"+ str(round(outstanding_balance,2)))
+    paid_amount = paid_amount + minimum_monthly_payment
+    if i ==12:
+        print("RESULT\nTotal amount paid: $" + str(round(paid_amount,2)) + "\nRemaining balance: $"+ str(round(outstanding_balance,2)))
  	
+
+""" Now write a program that calculates the minimum fixed monthly payment needed in order to pay
+off a credit card balance within 12 months. We will not be dealing with a minimum monthly
+payment rate.
+Take as raw_input() the following floating point numbers:
+1. the outstanding balance on the credit card
+2. annual interest rate as a decimal 
+Print out the fixed minimum monthly payment, number of months (at most 12 and possibly less
+than 12) it takes to pay off the debt, and the balance (likely to be a negative number).
+Assume that the interest is compounded monthly according to the balance at the start of the
+month (before the payment for that month is made). The monthly payment must be a multiple of
+$10 and is the same for all months. Notice that it is possible for the balance to become negative
+using this payment scheme. In short:
+Monthly interest rate = Annual interest rate / 12.0
+Updated balance each month = Previous balance * (1 + Monthly interest rate) – Minimum
+monthly payment
+Test Case 1
+>>>
+Enter the outstanding balance on your credit card: 1200
+Enter the annual credit card interest rate as a decimal: .18
+RESULT
+Monthly payment to pay off debt in 1 year: 120
+Number of months needed: 11
+Balance: -10.05
+>>>
+Test Case 2
+>>>
+Enter the outstanding balance on your credit card: 32000
+Enter the annual credit card interest rate as a decimal: .2
+RESULT
+Monthly payment to pay off debt in 1 year: 2970
+Number of months needed: 12
+Balance: -74.98
+>>> """
+
+
+print("\n\nProgram 2 is running\n\n")
+outstanding_balance = float(input("Enter the outstanding balance of your credit card: "))
+annual_interest_rate = float(input("Enter the annual credit card interest rate as a decimal: "))
+monthly_interest_rate = annual_interest_rate/12.0
+
+this_months_balance = outstanding_balance
+n = 1
+
+while this_months_balance > 0:
+    this_months_balance = outstanding_balance
+    min_monthly_payment = 10 * n
+    for i in range(1,13):
+        if this_months_balance > 0:
+            this_months_balance = this_months_balance * (1 + monthly_interest_rate) - min_monthly_payment
+        else:
+            break
+        months = i
+    n = n + 1 
+
+print("RESULT")
+print("Monthly payment to pay off debt in 1 year: ", min_monthly_payment)
+print("Number of months needed: ",months)
+print("Balance: ", round(this_months_balance, 2))
+        
+
+
 
 
 
